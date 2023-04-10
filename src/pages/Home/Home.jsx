@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import {
   fetchMoviesTrending,
   fetchMoviesSearch,
@@ -6,24 +7,43 @@ import {
 } from 'services/fetchMovies';
 
 const Home = () => {
-    const isFirstRender = useRef(true);
+  const isFirstRender = useRef(true);
+  const location = useLocation();
+  const [moviesTrend, setMoviesTrend] = useState([]);
 
-    useEffect(() => {
-        if (isFirstRender.current) {
-            isFirstRender.current = false;
-            return;
-        }
-       const moviesTrending = fetchMoviesTrending();
-       moviesTrending.then(res => console.log(res)); 
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
 
-        const moviesQuery = fetchMoviesSearch('batman');
-        moviesQuery.then(res => console.log(res));
+    const movies = fetchMoviesTrending();
+    movies.then(obj => {
+      console.log(obj.data.results);
+      setMoviesTrend([...obj.data.results]);
+    });
 
-        const movie = fetchMovie('268');
-        movie.then(res => console.log(res));
-    }, []);
+    // const moviesQuery = fetchMoviesSearch('batman');
+    // moviesQuery.then(res => console.log(res));
 
-    return <h1>Trending today</h1>
-}
+    const movie = fetchMovie('502356');
+    movie.then(res => console.log(res));
+  }, []);
+
+  return (
+    <>
+      <h1>Trending today</h1>
+      <ul>
+        {moviesTrend.map(movie => (
+          <li key={movie.id}>
+            <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+              {movie.original_title}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+};
 
 export default Home;

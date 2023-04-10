@@ -1,5 +1,11 @@
 const Cast = () => {
-    return <div>Cast</div>
+    return (
+      <div>
+            ghfghgffffhghfhfghfggfngfnbfgnfgbn
+            gnfgngfnxfnfx
+            nxfnxfnffn
+      </div>
+    );
 }
 
 export default Cast;
