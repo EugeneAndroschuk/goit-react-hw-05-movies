@@ -1,14 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import {
-  fetchMoviesTrending,
-  fetchMoviesSearch,
-  fetchMovie,
-} from 'services/fetchMovies';
+import { Link} from 'react-router-dom';
+import {getMoviesTrending} from 'services/fetchMovies';
 
 const Home = () => {
   const isFirstRender = useRef(true);
-  const location = useLocation();
   const [moviesTrend, setMoviesTrend] = useState([]);
 
   useEffect(() => {
@@ -17,17 +12,8 @@ const Home = () => {
       return;
     }
 
-    const movies = fetchMoviesTrending();
-    movies.then(obj => {
-      console.log(obj.data.results);
-      setMoviesTrend([...obj.data.results]);
-    });
-
-    // const moviesQuery = fetchMoviesSearch('batman');
-    // moviesQuery.then(res => console.log(res));
-
-    const movie = fetchMovie('502356');
-    movie.then(res => console.log(res));
+    const movies = getMoviesTrending();
+    movies.then(obj => setMoviesTrend([...obj.data.results]));
   }, []);
 
   return (
@@ -36,7 +22,7 @@ const Home = () => {
       <ul>
         {moviesTrend.map(movie => (
           <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+            <Link to={`/movies/${movie.id}`}>
               {movie.original_title}
             </Link>
           </li>

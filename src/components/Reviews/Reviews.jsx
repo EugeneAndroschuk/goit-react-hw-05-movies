@@ -1,11 +1,44 @@
+import { useParams } from 'react-router-dom';
+import { useRef, useState, useEffect } from 'react';
+import { getMovieReviews } from 'services/fetchMovies';
+
 const Reviews = () => {
-    return <div>
-        gjkdsfk;lgjsdkljlskgjhsklgjkg
-        ksdlksjdgkhsgjhkslgjhslg
-        ldl;dgkh;dglkhl;dfkg;lgjsdkljlskgjhsklgjkgglbhgfmkgfmbk
-        ldb;lbmgklmbklgmbkgm
-        dmbklbgmklgfmbklm
+  const { movieId } = useParams();
+  const [reviews, setReviews] = useState({});
+  const [isReviews, setIsReviews] = useState(false);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    const movieReviews = getMovieReviews(movieId);
+    movieReviews.then(obj => {
+      setReviews({ ...obj });
+      setIsReviews(true);
+      console.log(obj);
+    });
+  }, [movieId]);
+
+  return (
+    <div>
+      {isReviews &&
+        (reviews.data.results.length === 0 ? (
+          <p>We don't have any reviws for this movie</p>
+        ) : (
+          <ul>
+            {reviews.data.results.map(result => (
+              <li key={result.id}>
+                <p>Author: {result.author}</p>
+                <p>{result.content}</p>
+              </li>
+            ))}
+          </ul>
+        ))}
     </div>
-}
+  );
+};
 
 export default Reviews;

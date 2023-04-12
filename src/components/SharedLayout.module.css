@@ -5,4 +5,7 @@
 .nav-ul {
     display: flex;
     gap: 30px;
+    list-style: none;
+    text-decoration: none;
+    font-weight: 700;
 }

@@ -1,3 +1,15 @@
+.movies-page {
+    padding-bottom: 50px;
+}
+
 .movie-card {
+    display: flex;
+    gap: 20px;
+    border-bottom: 2px solid black;
+}
+
+/* .movie-info {} */
+
+.information {
     border-bottom: 2px solid black;
 }
