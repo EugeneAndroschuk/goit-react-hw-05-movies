@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
-import { getMovieReviews } from 'services/fetchMovies';
+import GetMovies from 'services/fetchMovies';
 
 const Reviews = () => {
   const { movieId } = useParams();
@@ -14,11 +14,10 @@ const Reviews = () => {
       return;
     }
 
-    const movieReviews = getMovieReviews(movieId);
+    const movieReviews = GetMovies.getMovieReviews(movieId);
     movieReviews.then(obj => {
       setReviews({ ...obj });
       setIsReviews(true);
-      console.log(obj);
     });
   }, [movieId]);
 

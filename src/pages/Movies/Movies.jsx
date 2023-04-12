@@ -1,13 +1,13 @@
 import { useSearchParams, Link, useLocation } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
-import { getMoviesSearch } from 'services/fetchMovies';
+import GetMovies from 'services/fetchMovies';
 
 const Movies = () => {
   const [inputValue, setInputValue] = useState('');
   const [moviesSearch, setMoviesSearch] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
-  const isFirstRender = useRef(true);
+    const isFirstRender = useRef(true);
 
     useEffect(() => {
     if (isFirstRender.current) {
@@ -17,11 +17,8 @@ const Movies = () => {
       if (inputValue) return;
     const query = searchParams.get('query');
     if (query) {
-      const movies = getMoviesSearch(query);
-      movies.then(obj => {
-        setMoviesSearch([...obj.data.results]);
-        console.log('это ЮсЭффект');
-      });
+      const movies = GetMovies.getMoviesSearch(query);
+      movies.then(obj => setMoviesSearch([...obj.data.results]));
     }
   }, [inputValue, searchParams]);
 
@@ -32,11 +29,8 @@ const Movies = () => {
   const onFormSubmit = e => {
     e.preventDefault();
     setSearchParams({ query: inputValue });
-    const movies = getMoviesSearch(inputValue);
-    movies.then(obj => {
-      setMoviesSearch([...obj.data.results]);
-      console.log('это ОнСабмит');
-    });
+    const movies = GetMovies.getMoviesSearch(inputValue);
+    movies.then(obj => setMoviesSearch([...obj.data.results]));
   };
 
   return (

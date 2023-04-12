@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { getMovieCast } from "services/fetchMovies";
+import GetMovies from "services/fetchMovies";
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -14,7 +14,7 @@ const Cast = () => {
       return;
     }
 
-    const castRequest = getMovieCast(movieId);
+    const castRequest = GetMovies.getMovieCast(movieId);
     castRequest.then(obj => {
       setCast({ ...obj });
       setIsCast(true);

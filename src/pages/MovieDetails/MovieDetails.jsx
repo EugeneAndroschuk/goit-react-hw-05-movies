@@ -1,43 +1,52 @@
 import { useEffect, useState, useRef } from 'react';
 import { useParams, Outlet, Link, useLocation } from 'react-router-dom';
 import css from './MovieDetails.module.css';
-import { getMovieDetails } from 'services/fetchMovies';
+import GetMovies from 'services/fetchMovies';
 
 const MovieDetails = () => {
   const isFirstRender = useRef(true);
+  const isFirstRenderLocation = useRef(true);
   const { movieId } = useParams();
   const [movie, setMovie] = useState({});
   const [isMovie, setIsMovie] = useState(false);
+  const [movieLocation, setMovieLocation] = useState();
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/';
-  console.log(location.state?.from);
+
+  useEffect(() => {
+    if (isFirstRenderLocation.current) {
+      if (location.state) setMovieLocation({ ...location.state.from });
+      else setMovieLocation({ }) ;
+      isFirstRenderLocation.current = false;
+      return;
+    }
+  } ,[location]);
+
 
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
-    const movieRequest = getMovieDetails(movieId);
+    const movieRequest = GetMovies.getMovieDetails(movieId);
     movieRequest.then(obj => {
       setMovie({ ...obj });
       setIsMovie(true);
-      console.log('movie info', obj)
     });
   }, [movieId]);
 
-//   useEffect(() => {
-//     if (isMovie) console.log('обновили стейт movie: ', movie.data);
-// }, [isMovie, movie]);
-
   return (
     <div className={css['movies-page']}>
-      <Link to={backLinkHref}>{`<-- Go back`}</Link>
+      <Link to={movieLocation ? movieLocation : '/'}>{`<-- Go back`}</Link>
       {isMovie && (
         <div className={css['movie-card']}>
-          <img
-            src={`https://image.tmdb.org/t/p/w200${movie.data.poster_path}`}
-            alt=""
-          />
+          {movie.data.poster_path ? (
+            <img
+              src={`https://image.tmdb.org/t/p/w200${movie.data.poster_path}`}
+              alt=""
+            />
+          ) : (
+            'No Poster'
+          )}
           <div className={css['movie-info']}>
             <h1>{movie.data.original_title}</h1>
             <p>{movie.data.release_date}</p>
