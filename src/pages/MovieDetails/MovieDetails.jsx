@@ -4,7 +4,7 @@ import css from './MovieDetails.module.css';
 import GetMovies from 'services/fetchMovies';
 
 const MovieDetails = () => {
-  const isFirstRender = useRef(true);
+  // const isFirstRender = useRef(true);
   const isFirstRenderLocation = useRef(true);
   const { movieId } = useParams();
   const [movie, setMovie] = useState({});
@@ -23,10 +23,10 @@ const MovieDetails = () => {
 
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
+    // if (isFirstRender.current) {
+    //   isFirstRender.current = false;
+    //   return;
+    // }
     const movieRequest = GetMovies.getMovieDetails(movieId);
     movieRequest.then(obj => {
       setMovie({ ...obj });

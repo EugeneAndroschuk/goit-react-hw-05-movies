@@ -1,18 +1,18 @@
 import { useParams } from 'react-router-dom';
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import GetMovies from 'services/fetchMovies';
 
 const Reviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState({});
   const [isReviews, setIsReviews] = useState(false);
-  const isFirstRender = useRef(true);
+  // const isFirstRender = useRef(true);
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
+    // if (isFirstRender.current) {
+    //   isFirstRender.current = false;
+    //   return;
+    // }
 
     const movieReviews = GetMovies.getMovieReviews(movieId);
     movieReviews.then(obj => {

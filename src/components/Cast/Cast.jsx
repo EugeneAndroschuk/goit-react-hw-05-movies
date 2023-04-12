@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import GetMovies from "services/fetchMovies";
 
@@ -6,13 +6,13 @@ const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState({});
   const [isCast, setIsCast] = useState(false);
-  const isFirstRender = useRef(true);
+  // const isFirstRender = useRef(true);
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
+    // if (isFirstRender.current) {
+    //   isFirstRender.current = false;
+    //   return;
+    // }
 
     const castRequest = GetMovies.getMovieCast(movieId);
     castRequest.then(obj => {

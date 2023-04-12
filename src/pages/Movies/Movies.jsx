@@ -1,5 +1,5 @@
 import { useSearchParams, Link, useLocation } from 'react-router-dom';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import GetMovies from 'services/fetchMovies';
 
 const Movies = () => {
@@ -7,13 +7,13 @@ const Movies = () => {
   const [moviesSearch, setMoviesSearch] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
-    const isFirstRender = useRef(true);
+    // const isFirstRender = useRef(true);
 
     useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-      }
+    // if (isFirstRender.current) {
+    //   isFirstRender.current = false;
+    //   return;
+    //   }
       if (inputValue) return;
     const query = searchParams.get('query');
     if (query) {
