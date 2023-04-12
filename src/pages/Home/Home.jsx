@@ -3,16 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 import GetMovies from 'services/fetchMovies';
 
 const Home = () => {
-  // const isFirstRender = useRef(true);
   const [moviesTrend, setMoviesTrend] = useState([]);
   const location = useLocation();
 
   useEffect(() => {
-    // if (isFirstRender.current) {
-    //   isFirstRender.current = false;
-    //   return;
-    // }
-
     const movies = GetMovies.getMoviesTrending();
     movies.then(obj => setMoviesTrend([...obj.data.results]));
   }, []);

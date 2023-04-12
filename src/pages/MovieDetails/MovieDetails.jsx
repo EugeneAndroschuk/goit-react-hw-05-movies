@@ -4,7 +4,6 @@ import css from './MovieDetails.module.css';
 import GetMovies from 'services/fetchMovies';
 
 const MovieDetails = () => {
-  // const isFirstRender = useRef(true);
   const isFirstRenderLocation = useRef(true);
   const { movieId } = useParams();
   const [movie, setMovie] = useState({});
@@ -23,10 +22,6 @@ const MovieDetails = () => {
 
 
   useEffect(() => {
-    // if (isFirstRender.current) {
-    //   isFirstRender.current = false;
-    //   return;
-    // }
     const movieRequest = GetMovies.getMovieDetails(movieId);
     movieRequest.then(obj => {
       setMovie({ ...obj });
@@ -48,8 +43,11 @@ const MovieDetails = () => {
             'No Poster'
           )}
           <div className={css['movie-info']}>
-            <h1>{movie.data.original_title}</h1>
-            <p>{movie.data.release_date}</p>
+            <h1>
+              {movie.data.original_title} ({movie.data.release_date.slice(0, 4)}
+              )
+            </h1>
+            <p>User Score: {Math.round(movie.data.vote_average * 10)}%</p>
             <p>Overview</p>
             <p>{movie.data.overview}</p>
             <p>Genres</p>

@@ -6,14 +6,8 @@ const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState({});
   const [isCast, setIsCast] = useState(false);
-  // const isFirstRender = useRef(true);
 
   useEffect(() => {
-    // if (isFirstRender.current) {
-    //   isFirstRender.current = false;
-    //   return;
-    // }
-
     const castRequest = GetMovies.getMovieCast(movieId);
     castRequest.then(obj => {
       setCast({ ...obj });

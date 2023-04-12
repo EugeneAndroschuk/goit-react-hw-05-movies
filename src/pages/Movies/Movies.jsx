@@ -7,14 +7,9 @@ const Movies = () => {
   const [moviesSearch, setMoviesSearch] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
-    // const isFirstRender = useRef(true);
 
-    useEffect(() => {
-    // if (isFirstRender.current) {
-    //   isFirstRender.current = false;
-    //   return;
-    //   }
-      if (inputValue) return;
+  useEffect(() => {
+    if (inputValue) return;
     const query = searchParams.get('query');
     if (query) {
       const movies = GetMovies.getMoviesSearch(query);
