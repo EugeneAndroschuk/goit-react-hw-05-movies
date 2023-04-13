@@ -1,15 +1,31 @@
-.movies-page {
-    padding-bottom: 50px;
+.movie-details {
+    padding: 10px;
+    font-size: 14px;
+    border-bottom: 2px solid rgb(187, 186, 186);
+}
+
+Link {
+    display: inline-block;
+    border: 1px solid black;
+    margin-bottom: 5px;
 }
 
 .movie-card {
     display: flex;
     gap: 20px;
-    border-bottom: 2px solid black;
 }
 
-/* .movie-info {} */
+.movie-prop {
+    font-size: 16px;
+    font-weight: 700;
+}
 
 .information {
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid rgb(187, 186, 186);
+}
+
+.additional-info {
+    padding-left: 10px;
+    font-size: 16px;
+    font-weight: 400;
 }

@@ -8,12 +8,12 @@ const SharedLayout = () => {
           <nav>
             <ul className={css['nav-ul']}>
               <li>
-                <NavLink to="/">
+                <NavLink to="/" style={{ textDecoration: 'none' }}>
                   Home
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/movies">
+                <NavLink to="/movies" style={{ textDecoration: 'none' }}>
                   Movies
                 </NavLink>
               </li>

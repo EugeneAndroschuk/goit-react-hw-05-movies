@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import GetMovies from 'services/fetchMovies';
+import css from './Home.module.css';
 
 const Home = () => {
   const [moviesTrend, setMoviesTrend] = useState([]);
@@ -12,7 +13,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <div className={css['home-page']}>
       <h1>Trending today</h1>
       <ul>
         {moviesTrend.map(movie => (
@@ -23,7 +24,7 @@ const Home = () => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 

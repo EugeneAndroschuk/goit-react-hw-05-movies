@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import GetMovies from 'services/fetchMovies';
+import css from './reviews.module.css';
 
 const Reviews = () => {
   const { movieId } = useParams();
@@ -24,7 +25,7 @@ const Reviews = () => {
           <ul>
             {reviews.data.results.map(result => (
               <li key={result.id}>
-                <p>Author: {result.author}</p>
+                <p className={css.author}>Author: {result.author}</p>
                 <p>{result.content}</p>
               </li>
             ))}

@@ -1,6 +1,7 @@
 import { useSearchParams, Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import GetMovies from 'services/fetchMovies';
+import css from './Movies.module.css';
 
 const Movies = () => {
   const [inputValue, setInputValue] = useState('');
@@ -29,7 +30,7 @@ const Movies = () => {
   };
 
   return (
-    <div>
+    <div className={css['movies-page']}>
       <form action="" onSubmit={onFormSubmit}>
         <input type="text" value={inputValue} onChange={handleValue} />
         <button type="submit">Search</button>
